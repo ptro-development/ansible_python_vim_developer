@@ -1,0 +1,57 @@
+  - name: install Vim
+    yum: pkg={{ item }} state=latest update_cache=true
+    with_items:
+    - vim-common
+    - vim-enhanced
+  - name: create user developer
+    action: user name=developer state=present shell=/bin/bash groups=developer,mock,vboxsf
+  - name: install python packages
+    yum: pkg={{ item }} state=latest update_cache=true
+    with_items:
+    - python-pip
+    - python-setuptools
+    - python-nose
+    - python-mock
+  - name: install python pip packages
+    command: /usr/bin/pip install {{ item }}
+    with_items:
+    - nose-cov
+    - flake8
+    register: pip_install_result
+  - debug: pip_install_result
+  - name: install Svn
+    action: yum name=subversion state=latest
+    tags: install_svn
+  - name: install Git
+    action: yum name=git state=latest
+    tags: install_git
+  - name: copy Vim default settings file
+    copy: src=vimrc dest={{ item.home }}/.vimrc owner={{ item.name }} group={{ item.name }} mode=600 backup=yes
+    with_items: "{{ USERS }}"
+    tags: set_vimrc
+  - name: create Vim directory
+    file: path={{ item.home }}/.vim owner={{ item.name }} group={{ item.name }} state=directory
+    with_items: "{{ USERS }}"
+    tags: set_vim_directory
+  - name: create Vim plugin directories
+    file: path={{ item.0.home }}/.vim/{{ item[1] }} owner={{ item.0.name }} group={{ item.0.name }} state=directory
+    with_nested:
+     - "{{ USERS }}"
+     - ["bundle", "autoload"]
+    tags: set_vim_plugin_directories
+  - name: install Vim Pathogen
+    # get_url: url=https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim validate_certs=no dest={{ developer_home }}/.vim/autoload/pathogen.vim
+    command: curl -LSso {{ item.home }}/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    with_items: "{{ USERS }}"
+    tags: install_vim_pathogen
+  - name: install Vim Syntastic
+    git: repo=https://github.com/scrooloose/syntastic.git dest={{ item.home }}/.vim/bundle/syntastic
+    with_items: "{{ USERS }}"
+    tags: install_vim_syntastic
+  - name: install other packages
+    yum: pkg={{ item }} state=latest update_cache=true
+    with_items:
+    - tree
+    - mc
+    - jq
+    tags: install_other_packages

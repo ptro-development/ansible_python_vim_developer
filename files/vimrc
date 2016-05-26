@@ -1,0 +1,33 @@
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" show whitespace
+:highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+
+:au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+:au InsertLeave * match ExtraWhitespace /\s\+$/
+
+:setlocal spell spelllang=en_gb
+:set spell
+" Press Ctrl-Shift-s to toggle spellcheck on/off, and show current value.
+:noremap <silent> <C-S> :set spell! spell?<CR>
+
+set hlsearch
+" Press space bar to toggle highlighting on/off, and show current value.
+:noremap <silent> <Space> :set hlsearch! hlsearch?<CR>
+
+execute pathogen#infect()
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['flake8']
+
+let g:tagbar_usearrows = 1
+nnoremap <leader>l :TagbarToggle<CR>

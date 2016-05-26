@@ -1,0 +1,7 @@
+USERS:
+ - name: root
+   home: /root
+ - name: developer
+   home: /home/developer
+ - name: ansible
+   home: /home/ansible
