@@ -18,7 +18,7 @@
     - nose-cov
     - flake8
     register: pip_install_result
-  - debug: pip_install_result
+  # - debug: pip_install_result
   - name: install Svn
     action: yum name=subversion state=latest
     tags: install_svn
