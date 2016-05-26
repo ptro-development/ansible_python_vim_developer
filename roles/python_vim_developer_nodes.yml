@@ -1,0 +1,8 @@
+--- # Developer VIM / Python environment
+- hosts: python_developer_vim_nodes
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: false
+  roles:
+   - python_developer_vim_nodes
