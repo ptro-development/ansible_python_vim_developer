@@ -1,5 +1,5 @@
 # ansible_python_vim_developer
-Basic CentOs6 ansible module for a python developer using vim. User developer is crerted as part of built. Also, things like
+Basic CentOs6 ansible module for a python developer using Vim editor. User *developer* is created as part of build. Also, things like
 - python-pip
 - python-setuptools
 - python-nose
@@ -10,4 +10,4 @@ Basic CentOs6 ansible module for a python developer using vim. User developer is
 - Vim Syntastic
 - etc ...
 
-are available.
+are available. For *developer* user Vim setting look into */home/developer/.vimrc* 
