@@ -4,7 +4,7 @@
     - vim-common
     - vim-enhanced
   - name: create user developer
-    action: user name=developer state=present shell=/bin/bash groups=developer,mock,vboxsf
+    action: user name=developer state=present shell=/bin/bash
   - name: install python packages
     yum: pkg={{ item }} state=latest update_cache=true
     with_items:
@@ -18,7 +18,6 @@
     - nose-cov
     - flake8
     register: pip_install_result
-  # - debug: pip_install_result
   - name: install Svn
     action: yum name=subversion state=latest
     tags: install_svn
