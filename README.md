@@ -10,4 +10,4 @@ Basic CentOs6 ansible module for a python developer using Vim editor. User *deve
 - Vim Syntastic
 - etc ...
 
-are available. For *developer* user Vim setting look into */home/developer/.vimrc* 
+are available. For *developer* user Vim settings look into */home/developer/.vimrc* 
