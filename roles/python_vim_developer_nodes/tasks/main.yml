@@ -4,7 +4,7 @@
     - vim-common
     - vim-enhanced
   - name: create user developer
-    action: user name=developer state=present shell=/bin/bash
+    action: user name=developer state=present shell=/bin/bash password=basebuild
   - name: install python packages
     yum: pkg={{ item }} state=latest update_cache=true
     with_items:
