@@ -3,8 +3,8 @@
     with_items:
     - vim-common
     - vim-enhanced
-  - name: create user developer
-    action: user name=developer state=present shell=/bin/bash password=basebuild
+  - name: create user developer with password basebuild
+    action: user name=developer state=present shell=/bin/bash password="$6$KBXGT2tZ$ybUVrwSYYzh7KcJnPpNG1oMfSGudiNq1..JaPmujlObEMXvNP6677bhvoV9XRq.VobJoI6QpM1uGfuP7Js7bJ/"
   - name: install python packages
     yum: pkg={{ item }} state=latest update_cache=true
     with_items:
