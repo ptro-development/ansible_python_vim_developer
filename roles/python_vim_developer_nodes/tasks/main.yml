@@ -28,6 +28,9 @@
     copy: src=vimrc dest={{ item.home }}/.vimrc owner={{ item.name }} group={{ item.name }} mode=600 backup=yes
     with_items: "{{ USERS }}"
     tags: set_vimrc
+  - name: set alias for vi to be vim
+    command: echo "alias vi='/usr/bin/vim'" >> {{ item.0.home }}/.bashrc
+    with_items: "{{ USERS }}"
   - name: create Vim directory
     file: path={{ item.home }}/.vim owner={{ item.name }} group={{ item.name }} state=directory
     with_items: "{{ USERS }}"
